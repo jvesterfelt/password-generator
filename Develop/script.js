@@ -5,7 +5,16 @@ var upperCase = "ABCDEGGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "0123456789";
 var specialChar = "!@#$^&*~?";
 var setCriteria = "";
-var password;
+var password = "";
+var passwordLength = "";
+
+
+// Function to reset values
+function reset() {
+    setCriteria = "";
+    password = "";
+    passwordLength = "";
+}
 
 // Write password to the #password input
 function writePassword() {
@@ -15,42 +24,73 @@ function writePassword() {
     var confirmUpperCase = confirm("Would you like to use capital letters?");
     var confirmNumbers = confirm("Would you like to use numbers?");
     var confirmSpecialChar = confirm("Would you like to use special characters?");
+    // while (confirmLowerCase || confirmUpperCase || confirmNumbers || confirmSpecialChar) {
+    //     if (confirmLowerCase) {
+    //         setCriteria = setCriteria + lowerCase;
+    //     } else {
+    //         setCriteria = setCriteria;
+    //     }
+    //     if (confirmUpperCase) {
+    //         setCriteria = setCriteria + upperCase;
+    //     } else {
+    //         setCriteria = setCriteria;
+    //     }
+    //     if (confirmNumbers) {
+    //         setCriteria = setCriteria + numbers;
+    //     } else {
+    //         setCriteria = setCriteria;
+    //     }
+    //     if (confirmSpecialChar) {
+    //         setCriteria = setCriteria + specialChar;
+    //     } else {
+    //         setCriteria = setCriteria;
+    //     }
+    //     if (setCriteria.length > 26) {
+    //         return setCriteria;
+    //     } else {
+    //         alert("Please select more criteria to create a stronger password.");
+    //         return false;
+    //     }
+    // }
 
     if (confirmLowerCase) {
         if (confirmUpperCase) {
             if (confirmNumbers) {
                 if (confirmSpecialChar) {
-                    setCriteria = lowerCase + upperCase + numbers + specialChar;
+                    var setCriteria_full = lowerCase + upperCase + numbers + specialChar;
+                    setCriteria = setCriteria_full;
                 } else {
-                    setCriteria = lowerCase + upperCase + numbers;
+                    var setCriteria_alphaNum = lowerCase + upperCase + numbers;
+                    setCriteria = setCriteria_alphaNum;
                 }
             } else {
-                setCriteria = lowerCase + upperCase;
+                var setCriteria_alpha = lowerCase + upperCase;
+                setCriteria = setCriteria_alpha;
             }
         } else {
-            var confirmSelection = confirm(
-                "The best passwords use a combination of lower case, capital, numbers, and special characters. Would you like to select your criteria again?"
-            );
-            if (confirmSelection) {
-                writePassword();
+            var setCriteria_lower = lowerCase;
+            setCriteria = setCriteria_lower;
+            console.log(setCriteria.length);
+            if (setCriteria.length <= 26) {
+                alert("Please select more criteria to create a stronger password.");
+                return false;
             } else {
-                confirm("This program is intended to make strong passwords. Please select more password criteria.")
+                return true;
             }
         }
     } else {
-        confirm("Reached end of password criteria.")
+        confirm("Please select more criteria to create a stronger password.");
+        return false;
     }
-    console.log(setCriteria);
 
     // Establish password length
-    var passwordLength = prompt("Please enter the desired length of password between 8 and 128 characters:");
+    passwordLength = prompt("Please enter the desired length of password between 8 and 128 characters:");
     passwordLength = parseInt(passwordLength);
-    console.log(passwordLength);
 
     if (passwordLength > 8 && passwordLength < 128) {
-        for (var i = 0; i < passwordLength.length; i++) {
-            password = password + setCriteria.charAt(Math.floor(Math.random() * passwordLength.length));
-            console.log(password);
+        for (var i = 0; i < passwordLength; i++) {
+            var tempPassword = setCriteria[(Math.floor(Math.random() * setCriteria.length))];
+            password = password + tempPassword;
         }
     } else {
         alert("Invalid response. Click 'Generate Password' again and enter a number between 8 and 128.");
@@ -58,10 +98,12 @@ function writePassword() {
     }
 
     var passwordText = document.querySelector("#password");
-    console.log(passwordText);
+    // console.log(passwordText);
 
     passwordText.value = password;
-    console.log(passwordText.value);
+    // console.log(passwordText.value);
+
+    reset();
 }
 
 // Add event listener to generate button
