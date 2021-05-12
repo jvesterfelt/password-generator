@@ -28,13 +28,14 @@ function writePassword() {
     var confirmArray = [confirmLowerCase, confirmUpperCase, confirmNumbers, confirmSpecialChar];
     var criteriaArray = [lowerCase, upperCase, numbers, specialChar];
 
+    // loop through user responses, set password criteria according to user selections, validate user responses
     for (var i = 0; i < confirmArray.length; i++) {
         if (confirmArray[i]) {
             setCriteria = setCriteria + criteriaArray[i];
             console.log(setCriteria);
         }
     }
-
+    // validate that user selected at least one data type for criteria
     if (setCriteria.length < 9) {
         alert("Please select more criteria to create a stronger password.");
         return false;
@@ -44,6 +45,7 @@ function writePassword() {
     passwordLength = prompt("Please enter the desired length of password between 8 and 128 characters:");
     passwordLength = parseInt(passwordLength);
 
+    // Validate the desired length of password, between 8 and 128 characters
     if (passwordLength > 8 && passwordLength < 128) {
         for (var i = 0; i < passwordLength; i++) {
             var tempPassword = setCriteria[(Math.floor(Math.random() * setCriteria.length))];
