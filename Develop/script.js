@@ -32,7 +32,6 @@ function writePassword() {
     for (var i = 0; i < confirmArray.length; i++) {
         if (confirmArray[i]) {
             setCriteria = setCriteria + criteriaArray[i];
-            console.log(setCriteria);
         }
     }
     // validate that user selected at least one data type for criteria
