@@ -16,6 +16,7 @@ function reset() {
     passwordLength = "";
 }
 
+
 // Write password to the #password input
 function writePassword() {
 
@@ -24,62 +25,18 @@ function writePassword() {
     var confirmUpperCase = confirm("Would you like to use capital letters?");
     var confirmNumbers = confirm("Would you like to use numbers?");
     var confirmSpecialChar = confirm("Would you like to use special characters?");
-    // while (confirmLowerCase || confirmUpperCase || confirmNumbers || confirmSpecialChar) {
-    //     if (confirmLowerCase) {
-    //         setCriteria = setCriteria + lowerCase;
-    //     } else {
-    //         setCriteria = setCriteria;
-    //     }
-    //     if (confirmUpperCase) {
-    //         setCriteria = setCriteria + upperCase;
-    //     } else {
-    //         setCriteria = setCriteria;
-    //     }
-    //     if (confirmNumbers) {
-    //         setCriteria = setCriteria + numbers;
-    //     } else {
-    //         setCriteria = setCriteria;
-    //     }
-    //     if (confirmSpecialChar) {
-    //         setCriteria = setCriteria + specialChar;
-    //     } else {
-    //         setCriteria = setCriteria;
-    //     }
-    //     if (setCriteria.length > 26) {
-    //         return setCriteria;
-    //     } else {
-    //         alert("Please select more criteria to create a stronger password.");
-    //         return false;
-    //     }
-    // }
+    var confirmArray = [confirmLowerCase, confirmUpperCase, confirmNumbers, confirmSpecialChar];
+    var criteriaArray = [lowerCase, upperCase, numbers, specialChar];
 
-    if (confirmLowerCase) {
-        if (confirmUpperCase) {
-            if (confirmNumbers) {
-                if (confirmSpecialChar) {
-                    var setCriteria_full = lowerCase + upperCase + numbers + specialChar;
-                    setCriteria = setCriteria_full;
-                } else {
-                    var setCriteria_alphaNum = lowerCase + upperCase + numbers;
-                    setCriteria = setCriteria_alphaNum;
-                }
-            } else {
-                var setCriteria_alpha = lowerCase + upperCase;
-                setCriteria = setCriteria_alpha;
-            }
-        } else {
-            var setCriteria_lower = lowerCase;
-            setCriteria = setCriteria_lower;
-            console.log(setCriteria.length);
-            if (setCriteria.length <= 26) {
-                alert("Please select more criteria to create a stronger password.");
-                return false;
-            } else {
-                return true;
-            }
+    for (var i = 0; i < confirmArray.length; i++) {
+        if (confirmArray[i]) {
+            setCriteria = setCriteria + criteriaArray[i];
+            console.log(setCriteria);
         }
-    } else {
-        confirm("Please select more criteria to create a stronger password.");
+    }
+
+    if (setCriteria.length < 9) {
+        alert("Please select more criteria to create a stronger password.");
         return false;
     }
 
