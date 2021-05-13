@@ -35,7 +35,7 @@ function writePassword() {
         }
     }
     // validate that user selected at least one data type for criteria
-    if (setCriteria.length < 9) {
+    if (!setCriteria) {
         alert("Please select more criteria to create a stronger password.");
         return false;
     }
@@ -45,7 +45,7 @@ function writePassword() {
     passwordLength = parseInt(passwordLength);
 
     // Validate the desired length of password, between 8 and 128 characters
-    if (passwordLength > 8 && passwordLength < 128) {
+    if (passwordLength > 7 && passwordLength < 129) {
         for (var i = 0; i < passwordLength; i++) {
             var tempPassword = setCriteria[(Math.floor(Math.random() * setCriteria.length))];
             password = password + tempPassword;
