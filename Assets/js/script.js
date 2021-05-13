@@ -1,4 +1,4 @@
-// Assignment Code
+// List global variables
 var generateBtn = document.querySelector("#generate");
 var lowerCase = "abcdefghijklmnopqrstuvwxyz";
 var upperCase = "ABCDEGGHIJKLMNOPQRSTUVWXYZ";
@@ -20,7 +20,7 @@ function reset() {
 // Write password to the #password input
 function writePassword() {
 
-    //Establish password criteria
+    //Prompt user for data types to establish password criteria
     var confirmLowerCase = confirm("Would you like to use lowercase letters?");
     var confirmUpperCase = confirm("Would you like to use capital letters?");
     var confirmNumbers = confirm("Would you like to use numbers?");
@@ -28,16 +28,16 @@ function writePassword() {
     var confirmArray = [confirmLowerCase, confirmUpperCase, confirmNumbers, confirmSpecialChar];
     var criteriaArray = [lowerCase, upperCase, numbers, specialChar];
 
-    // loop through user responses, set password criteria according to user selections, validate user responses
+    // Loop through user responses, set password criteria according to user selections, validate user responses
     for (var i = 0; i < confirmArray.length; i++) {
         if (confirmArray[i]) {
             setCriteria = setCriteria + criteriaArray[i];
         }
     }
-    // validate that user selected at least one data type for criteria
+    // Validate that user selected at least one data type for criteria
     if (!setCriteria) {
         alert("Please select more criteria to create a stronger password.");
-        return false;
+        return;
     }
 
     // Establish password length
@@ -52,7 +52,7 @@ function writePassword() {
         }
     } else {
         alert("Invalid response. Click 'Generate Password' again and enter a number between 8 and 128.");
-        return false;
+        return;
     }
 
     var passwordText = document.querySelector("#password");
